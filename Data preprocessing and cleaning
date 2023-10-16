@@ -1,0 +1,58 @@
+Task 1: Exploring NASA's Data Universe.
+Our analysis of NASA's dataset is a mission to unveil profound insights within the realm of space exploration. Beyond mere data analysis, it's a journey to harness the knowledge hidden in the stars. Through this exploration, we aim to uncover patterns that will guide future missions, enhancing NASA's cosmic endeavors. Every data point is a piece of the cosmic puzzle, fueling innovation and inspiring generations to reach for the stars. In these numbers and statistics, we find the roadmap to the next frontier of human exploration.
+
+
+Task 1: Exploring NASA's Data Universe.
+Our analysis of NASA's dataset is a mission to unveil profound insights within the realm of space exploration. Beyond mere data analysis, it's a journey to harness the knowledge hidden in the stars. Through this exploration, we aim to uncover patterns that will guide future missions, enhancing NASA's cosmic endeavors. Every data point is a piece of the cosmic puzzle, fueling innovation and inspiring generations to reach for the stars. In these numbers and statistics, we find the roadmap to the next frontier of human exploration.
+
+#--- Import Pandas ---
+import pandas as pd
+#--- Read in dataset ----
+df = pd.read_csv("nasa.csv")
+​
+# ---WRITE YOUR CODE FOR TASK 1 ---
+#--- Inspect data ---
+df.head()
+
+Task 2: Exploring Data Completeness.
+In the midst of your data exploration, armed with the NASA astronaut dataset, you've arrived at a crucial juncture. You're now delving into the realm of data quality, seeking to understand the integrity of the information you're working with. With a few lines of code, you've calculated the number of missing values for each column in the dataset, and the results are illuminating.
+
+# --- WRITE YOUR CODE FOR TASK 2 ---
+null_values = df.isnull().sum()
+​
+#--- Inspect data ---
+null_values
+
+Task 3: Data Refinement for NASA Astronaut Data.
+In your ongoing journey through the NASA astronaut dataset, you've embarked on a quest for data integrity and precision. The code you've executed represents a pivotal moment in this endeavor, where you're not just analyzing data but also sculpting it to reveal the true narrative of these space pioneers.
+
+#--- WRITE YOUR CODE FOR TASK 3 ---
+df.dropna(subset=['Alma_Mater'], inplace=True)
+​
+filtered_rows = df[(df['Death_Mission'].isnull()) & (~df['Death_Date'].isnull())]
+df.drop(filtered_rows.index,inplace=True)
+​
+df['Birth_Date'] = pd.to_datetime(df['Birth_Date'], dayfirst=True)
+df['Death_Date'] = pd.to_datetime(df['Death_Date'], dayfirst=True)
+​
+#--- Inspect data ---
+df.head()
+
+Task 4: Preparing Data for SQL Analysis.
+In the midst of your data journey through the NASA astronaut dataset, you've arrived at a crucial juncture where your focus shifts to data export and preparation for a new phase in your analysis.
+
+The destination is clear: a CSV file named 'astronauts.csv' that will serve as the foundation for your SQL exploration. This export step ensures that the data you've curated and cleaned is ready to be loaded into a relational database, where you can perform more intricate queries and derive deeper insights.
+
+# ...WRITE YOUR CODE FOR TASK 4 ...
+#export the cleaned data
+df.to_csv('astronauts.csv',index=False)
+#--- Inspect data ---
+df.head()
+
+Task 5: Data Download, Import, and Database Connection.
+# -- Load the sql extention ----
+%load_ext sql
+​
+# --- Load your mysql db using credentials from the "DB" area ---
+%sql mysql+pymysql://b3e69994:Cab#22se@localhost/b3e69994
+        
